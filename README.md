@@ -62,7 +62,7 @@ FlowMesh is a UI project. All data is static demo data and there is no backend, 
 ### Install and run
 
 ```bash
-git clone <your-repo-url> flowmesh-web
+git clone https://github.com/NtohnwiBih/flowmesh-web.git flowmesh-web
 cd flowmesh-web
 npm install
 npm run dev

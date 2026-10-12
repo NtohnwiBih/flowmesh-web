@@ -69,7 +69,7 @@ type NavbarProps = {
 export function Navbar({ collapsed, onToggleCollapse, onOpenMobile }: NavbarProps) {
   const route = getRoute(usePathname());
   const { workspace, environment } = useApp();
-  const title = route?.href === "/workflows" ? "Workflow Editor" : route?.label ?? "FlowMesh";
+  const title = route?.href === "/" ? "Workflow Editor" : route?.label ?? "FlowMesh";
 
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-background px-3 sm:px-5">

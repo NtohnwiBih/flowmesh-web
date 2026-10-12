@@ -92,8 +92,8 @@ The build needs **no network access for fonts**. Geist ships inside the `geist` 
 
 | Route | Page | Notes |
 |---|---|---|
-| `/` | Dashboard | Stats, volume chart, system health, recent executions |
-| `/workflows` | Workflow editor | Full-bleed canvas, no page header |
+| `/` | Workflow editor | Full-bleed canvas, no page header |
+| `/dashboard` | Dashboard | Stats, volume chart, system health, recent executions |
 | `/executions` | Executions list | Rows link to the detail page |
 | `/executions/[id]` | Execution detail | Prerendered for known IDs via `generateStaticParams`; unknown IDs call `notFound()` |
 | `/templates` | Templates | Cards link to `/workflows?template=<id>` |

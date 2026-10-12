@@ -10,8 +10,8 @@ import {
 } from "lucide-react";
 
 export const nav = [
-  { label: "Dashboard", href: "/", icon: LayoutDashboard },
-  { label: "Workflows", href: "/workflows", icon: Workflow },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Workflows", href: "/", icon: Workflow },
   { label: "Execution Details", href: "/executions", icon: Activity },
   { label: "Templates", href: "/templates", icon: FileStack },
   { label: "Integrations", href: "/integrations", icon: Blocks },

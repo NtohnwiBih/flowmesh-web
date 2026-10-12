@@ -341,11 +341,12 @@ Status of each route in the Next.js migration:
 
 | Route | Status |
 |---|---|
-| `/dashboard` | Done |
+| `/dashboard` | To do: `overview`, `stat-cards`, `volume-chart`, 
+`system-health` |
 | `/executions` and `/executions/[id]` | Done |
 | `/templates` | Done |
 | `/integrations` (with SVG logos) | Done |
-| `/` (dashboard) | To do: `overview`, `stat-cards`, `volume-chart`, `system-health` |
+| `/` (workflow) | Done |
 | `/workers` | To do: reuses the overview components |
 | `/analytics` | To do: reuses the overview components |
 | `/settings` | To do: `settings-panel` |

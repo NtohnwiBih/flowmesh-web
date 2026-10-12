@@ -57,6 +57,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { cn } from "@/lib/utils";
 import { integrations, integrationCategories, initials } from "@/lib/integrations";
 import { WorkflowLogs, type WorkflowLog } from "@/components/workflow-logs";
+import { IntegrationLogo } from "./integrations/integration-logo";
 
 type FlowNodeData = {
   label: string;
@@ -115,7 +116,7 @@ function FlowNodeCard({ id, data, selected }: NodeProps<FlowNode>) {
           <Button variant="outline" size="icon" type="button" title="Add connected step" aria-label={`Add step ${s.id}`} onClick={(e) => { e.stopPropagation(); openPicker(id, s.id); }} className="node-add-btn"><Plus /></Button>
         </div>
       ))}
-      <div className="flow-node-icon">{app ? <span className="text-[10px] font-bold">{initials(app.name)}</span> : <Icon />}</div>
+      <div className="flow-node-icon">{app ? <IntegrationLogo id={app.key} name={app.name} className="size-5" /> : <Icon />}</div>
       <div className="min-w-0 flex-1">
         <div className="mb-1 flex items-center gap-2">
           <span className="truncate text-xs font-semibold text-foreground">{data.label}</span>
@@ -349,7 +350,7 @@ export function WorkflowEditor({ environment = "Production", pendingIntegration,
         {picker && (() => { const from = nodes.find((n) => n.id === picker.nodeId); const q = pickerQuery.toLowerCase();
           const groups = (pickerTab === "nodes"
             ? library.map((g) => ({ name: g.kind, items: g.items.filter((i) => i.label.toLowerCase().includes(q)).map((i) => ({ key: i.key, title: i.label, sub: g.kind, icon: <i.icon className="size-4 text-primary" /> })) }))
-            : integrationCategories.map((c) => ({ name: c, items: integrations.filter((i) => i.category === c && i.name.toLowerCase().includes(q)).map((i) => ({ key: i.key, title: i.name, sub: i.action, icon: <span className="text-[10px] font-bold text-primary">{initials(i.name)}</span> })) }))).filter((g) => g.items.length);
+            : integrationCategories.map((c) => ({ name: c, items: integrations.filter((i) => i.category === c && i.name.toLowerCase().includes(q)).map((i) => ({ key: i.key, title: i.name, sub: i.action, icon: <IntegrationLogo id={i.key} name={i.name} className="size-4" /> })) }))).filter((g) => g.items.length);
           return (
           <aside className="absolute inset-y-0 right-0 z-30 flex w-[min(360px,92vw)] flex-col border-l border-border bg-surface shadow-panel">
             <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-4">
@@ -372,7 +373,7 @@ export function WorkflowEditor({ environment = "Production", pendingIntegration,
                   <div className="mb-2 px-1 text-[10px] font-semibold uppercase text-muted-foreground">{g.name}</div>
                   <div className="space-y-1">{g.items.map((it) => (
                     <Button variant="ghost" key={it.key} onClick={() => addFromPicker(it.key)} className="node-library-item h-auto w-full text-left">
-                      <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-primary/15">{it.icon}</span>
+                      <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-border bg-card">{it.icon}</span>
                       <span className="min-w-0 flex-1"><span className="block truncate text-xs font-medium text-foreground">{it.title}</span><span className="block truncate text-[10px] text-muted-foreground">{it.sub}</span></span>
                       <Plus className="size-3.5 text-muted-foreground" />
                     </Button>))}</div>
@@ -392,7 +393,9 @@ export function WorkflowEditor({ environment = "Production", pendingIntegration,
                   <div className="mb-2 px-1 text-[10px] font-semibold uppercase text-muted-foreground">{cat}</div>
                   <div className="space-y-1">{apps.map((app) => (
                     <button key={app.key} draggable onDragStart={(event) => { event.dataTransfer.setData("application/flowmesh", app.key); event.dataTransfer.effectAllowed = "move"; }} onClick={() => { const n = addNode(app.key, { x: 1500, y: 120 + nodes.length * 30 }); setAppsOpen(true); setPanelOpen(false); if (n) toast.success(`${app.name} added`, { description: app.action }); }} className="node-library-item w-full text-left">
-                      <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-primary/15 text-[10px] font-bold text-primary">{initials(app.name)}</span>
+                      <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-border bg-card">
+                        <IntegrationLogo id={app.key} name={app.name} className="size-4" />
+                      </span>
                       <span className="min-w-0 flex-1"><span className="block truncate text-xs font-medium text-foreground">{app.name}</span><span className="block truncate text-[10px] text-muted-foreground">{app.action}</span></span>
                       <Plus className="size-3.5 text-muted-foreground" />
                     </button>))}</div>
